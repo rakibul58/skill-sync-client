@@ -3,7 +3,7 @@
 "use client";
 
 import { SidebarGroup, SidebarMenuButton } from "@/components/ui/sidebar";
-import { LucideIcon, LayoutDashboardIcon, Tags } from "lucide-react";
+import { LucideIcon, LayoutDashboardIcon, Tags, Brain } from "lucide-react";
 import Link from "next/link";
 
 // Define route types for each role
@@ -22,7 +22,12 @@ const adminRoutes: RouteItem[] = [
   {
     href: "/admin/categories",
     icon: Tags,
-    label: "Categories",
+    label: "Categories Management",
+  },
+  {
+    href: "/admin/skills",
+    icon: Brain,
+    label: "Skills Management",
   },
 ];
 
