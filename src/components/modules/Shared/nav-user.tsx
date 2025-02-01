@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { ChevronsUpDown, KeyIcon, LogOut } from "lucide-react";
+import { ChevronsUpDown, KeyIcon, LogOut, User } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -25,13 +25,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { protectedRoutes } from "@/constants";
 import { logout } from "@/services/AuthServices";
 import Loading from "./LoadingBlur";
-import { ModeToggle } from "@/components/ModeToggle";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface UserAvatarDropdownProps {
   user: {
-    name: string;
+    user: { name: string };
     email: string;
   };
   role: string;
@@ -82,14 +81,14 @@ export function NavUser({ user, role, image }: UserAvatarDropdownProps) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground z-[105]"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={image} alt={user?.name} />
+                <AvatarImage src={image} alt={user?.user?.name} />
                 <AvatarFallback className="rounded-lg">
-                  {getInitials(user?.name) || "CN"}
+                  {getInitials(user?.user?.name) || "CN"}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {user?.name || "Username"}
+                  {user?.user?.name || "Username"}
                 </span>
                 <span className="truncate text-xs">
                   {user?.email || "example@gmail.com"}
@@ -107,23 +106,30 @@ export function NavUser({ user, role, image }: UserAvatarDropdownProps) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={image} alt={user?.name} />
+                  <AvatarImage src={image} alt={user?.user?.name} />
                   <AvatarFallback className="rounded-lg">
-                    {getInitials(user?.name) || "CN"}
+                    {getInitials(user?.user?.name) || "CN"}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    {user?.name || "Username"}
+                    {user?.user?.name || "Username"}
                   </span>
                   <span className="truncate text-xs">
                     {user?.email || "example@gmail.com"}
                   </span>
                 </div>
-                <ModeToggle />
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <Link href={`/${role?.toLowerCase()}/profile`}>
+                <DropdownMenuItem>
+                  <User />
+                  Profile
+                </DropdownMenuItem>
+              </Link>
+            </DropdownMenuGroup>
             <DropdownMenuGroup>
               <Link href={`/${role?.toLowerCase()}/change-password`}>
                 <DropdownMenuItem>

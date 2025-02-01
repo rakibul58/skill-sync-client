@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Store } from "lucide-react";
+import { Book } from "lucide-react";
 
 import {
   Sidebar,
@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
-import Link from "next/link";
 import { useUser } from "@/context/user.provider";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -21,14 +20,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarContent>
-          <Link href="/" className="flex items-center gap-2 font-bold">
+          <div className="flex items-center gap-2 font-bold">
             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-              <Store />
+              <Book />
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <h1 className="font-serif italic text-lg truncate">Vendozy</h1>
+                <h1 className="font-serif italic text-lg truncate">Skill Sync</h1>
               </div>
             </div>
-          </Link>
+          </div>
         </SidebarContent>
       </SidebarHeader>
       <SidebarContent>
@@ -36,10 +35,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <NavUser
-          user={user?.user}
+          user={user}
           role={user?.role}
           image={
-            user?.role === "VENDOR" ? user?.user?.logo : user?.user?.profileImg
+            user?.user?.avatar
           }
         />
       </SidebarFooter>
